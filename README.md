@@ -1,2 +1,4 @@
 # 3-2-project
-online platform to train yourself to improve your knowledge in coding
+
+Hi Friends.
+This is the place where we have to clone/deploy(commit) our codes everytime relating to the project. 
