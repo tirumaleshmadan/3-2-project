@@ -1,0 +1,66 @@
+.auth-box-container .contest-title{
+	width:480px;
+	margin-bottom:20px;
+	font-size:26px;
+	line-height:1.4;
+	box-sizing:border-box
+}
+@media screen and (max-width:767px){
+	.auth-box-container .contest-title{
+		width:100%;
+		font-size:22px
+	}
+}
+.auth-container{
+	text-align:center;
+}
+.auth-container .logo-img{
+	height:50px;
+	width: 200px;
+	margin-top:60px;
+	margin-bottom:5px;
+}
+.auth-container .auth-content-wrap{
+	display:inline-block;
+}
+@media screen and (max-width:767px){
+	.auth-container .logo-img{
+		height:40px;
+	}
+	.auth-container .auth-content-wrap{
+		display:block;
+	}
+}
+.auth-message{
+	text-align:center;
+	line-height:1.4;
+}
+.auth-message-icon{
+	color:#1ba94c;
+	font-size:50px;
+	margin-bottom:20px;
+}
+.auth-message-title{
+	font-size:26px;
+	font-weight:700;
+}
+.auth-message-content{
+	font-size:14px;
+	margin:20px;
+}
+@media screen and (max-width:767px){
+	.auth-message-icon{
+		font-size:40px;
+	}
+	.auth-message-title{
+		font-size:22px;
+	}
+}
+.google-recaptcha{
+	text-align:left;
+}
+.google-recaptcha .recaptcha-container.loading{
+	display:none;
+}
+
+/*# sourceMappingURL=https://staging.hackerrank.net/fcore-assets/sourcemaps/hackerrank_r_auth-80caced13aab926926c1.css.map*/

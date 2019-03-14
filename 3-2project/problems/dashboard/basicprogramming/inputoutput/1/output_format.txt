@@ -1,0 +1,1 @@
+Print HELLO WORLD! on the first line, and the string from the given input on the second line.
