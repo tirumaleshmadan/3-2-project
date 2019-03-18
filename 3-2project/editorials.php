@@ -4,8 +4,11 @@
 
     if($_SESSION['flag']==0)
     {
-        $_SESSION['B']=$_GET['ids'];
-        if(($_SESSION['B']=='basicprogramming') || ($_SESSION['B']=='datastructures') || ($_SESSION['B']=='algorithms'))
+        $result=$_GET['ids'];
+        $_SESSION['a']=substr($result,0,1);
+        $_SESSION['b']=$_SESSION['a'].substr($result,1,1);
+        $_SESSION['B']=substr($result,2);
+        if($_SESSION['a']=="a")
         {
             $_SESSION['A']='dashboard';
         }
@@ -17,6 +20,8 @@
     $data=mysqli_query($my,"SELECT * FROM $var1 WHERE topic_id=$var");
     $row=mysqli_fetch_assoc($data);
     $_SESSION['C']=$row['link'];
+    $_SESSION['cname']=$row['topic_name'];
+    $_SESSION['c']=$_SESSION['b'].$_SESSION['no'];
 
     if (isset($_POST['1']))
     {
@@ -168,6 +173,38 @@
                 width: 80%;
                 background-color: #fff;
             }
+            .dropbtn {
+                border: none;
+            }
+            .dropdown {
+                position: relative;
+                display: inline-block;
+            }
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #fff;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+                margin-left: 15%;
+            }
+            .dropdown-content a {
+                color: #5f027c;
+                font-weight: 700;
+                padding: 8px 16px;
+                text-decoration: none;
+                display: block;
+            }
+            .dropdown-content a:hover
+            {
+                background-color: #5f027c;
+                color: #fff;
+            }
+            .dropdown:hover .dropdown-content
+            {
+                display: block;
+            }
         </style>
     </head>
     <body>
@@ -183,15 +220,22 @@
     				<a href="Dashboard.php" class="hyper">practice</a>
     				<a href="Contests.php" class="hyper">compete</a>
     			</div>
-    			<div class="col-sm-3 bg-warning">
-    				<p>hello</p>
-    			</div>
-    			<div class="col-sm-1 bg-info">
-    				<p>hello</p>
-    			</div>
-    			<div class="col-sm-2 bg-primary">
-    				<p>hello</p>
-    			</div>
+    			<div class="col-sm-3">
+                    
+                </div>
+                <div class="col-sm-1">
+                    
+                </div>
+                <div class="col-sm-2 box dropdown" style="border-radius: 25px;width: 13.5%;margin: 0.2% 1.5% 0% 1.5%;cursor: pointer;">
+                    <div class="row dropbtn">
+                        <img src="title.png" style="width:55px; border-radius: 50% ;height:55px;margin: 0;float: left;">
+                        <p class="title3"><?php echo $_SESSION['user_name'] ?></p>
+                    </div>
+                    <div class="dropdown-content">
+                        <a href="profile.php">Profile</a>
+                        <a href="login.php">Logout</a>
+                    </div>    
+                </div>
     		</div>
     		<div class="row">
     			<div class="col-lg-3 bg-1">
@@ -201,14 +245,19 @@
                             $var=trim($_SESSION['A']);
                             $var1=trim($_SESSION['B']);
                             $data=mysqli_query($my,"SELECT * FROM $var WHERE link='$var1'");
-                            $head=mysqli_fetch_assoc($data)
+                            $head=mysqli_fetch_assoc($data);
+                            $val=$_SESSION['user_id'];
+                            $idel="a".(string)$_SESSION['no'];
+                            $ide=$_SESSION['b'];
+                            $rank=mysqli_query($my,"SELECT count(*) AS count FROM $ide WHERE $idel>(SELECT $idel FROM $ide WHERE user_id=$val)");
+                            $ans=mysqli_fetch_assoc($rank);
                         ?>
                     		<h1 class="topic"><?php echo $head['topic_name'] ?></h1>
                     	</div>
                     	<hr style="margin: 0" />
-                        <div id="rank" onclick="location.href='leaderboard.php'" class="container-fluid box" style="margin: 4% 3% 4% 3%;background-color: #5f027c;cursor: pointer;">
+                        <div id="rank" onclick="location.href='leaderboard.php?ids=<?php echo $_SESSION['b'].$idel ?>'" class="container-fluid box" style="margin: 4% 3% 4% 3%;background-color: #5f027c;cursor: pointer;">
                     		<p class="leade">LEADERBOARD</p>
-                        	<a href="leaderboard.php"><p class="leade"><u>38193</u></p></a>
+                        	<a href="leaderboard.php?ids=<?php echo $_SESSION['b'].$idel ?>"><p class="leade"><u><?php echo $ans['count']+1 ?></u></p></a>
                     	</div>
                     	<hr style="margin: 0" />
                         <?php

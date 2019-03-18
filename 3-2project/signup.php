@@ -62,7 +62,7 @@ session_start();
                                                                                     <div class="form-item">
                                                                                           <div class="custom-input theme-m size-large">
                                                                                                 <div class="input-wrap align-icon-left has-icon">
-                                                                                                      <input id="input-6" type="text" class="input" placeholder="First &amp; Last name" aria-label="First &amp; Last name" aria-invalid="false" name="name" value="">
+                                                                                                      <input id="input-6" type="text" class="input" placeholder="First &amp; Last name" aria-label="First &amp; Last name" aria-invalid="false" name="name" value="" required/>
                                                                                                       <i class="ui-icon-user input-icon"></i>
                                                                                                 </div>
                                                                                           </div>
@@ -70,7 +70,7 @@ session_start();
                                                                                     <div class="form-item">
                                                                                           <div class="custom-input theme-m size-large">
                                                                                                 <div class="input-wrap align-icon-left has-icon">
-                                                                                                      <input id="input-7" type="email" class="input" placeholder="Email" aria-label="Email" aria-invalid="false" name="email" value="">
+                                                                                                      <input id="input-7" type="email" class="input" placeholder="Email" aria-label="Email" aria-invalid="false" name="email" value="" required/>
                                                                                                       <i class="ui-icon-mail input-icon"></i>
                                                                                                 </div>
                                                                                           </div>
@@ -78,7 +78,7 @@ session_start();
                                                                                     <div class="form-item">
                                                                                           <div class="custom-input theme-m size-large">
                                                                                                 <div class="input-wrap align-icon-left has-icon">
-                                                                                                      <input id="input-8" type="password" class="input" placeholder="Your password" aria-label="Your password" aria-invalid="false" name="password" value="">
+                                                                                                      <input id="input-8" type="password" class="input" placeholder="Your password" aria-label="Your password" aria-invalid="false" name="password" value="" required/>
                                                                                                       <i class="ui-icon-lock input-icon"></i>
                                                                                                 </div>
                                                                                           </div>
@@ -95,7 +95,7 @@ session_start();
                                                                                           {
                                                                                                 $name=$_POST["name"];
                                                                                                 $email=$_POST["email"];
-                                                                                                $_SESSION['welcome']=$email;
+                                                                                                $_SESSION['user_email']=$email;
                                                                                                 $password=$_POST["password"];
                                           mysqli_query($my,"insert into user_data(name,email,password) value('$name','$email','$password')");
                                                                                           }

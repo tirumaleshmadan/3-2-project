@@ -75,6 +75,38 @@
                 background-color: #5f027c;
                 color: #fff;
             }
+            .dropbtn {
+                border: none;
+            }
+            .dropdown {
+                position: relative;
+                display: inline-block;
+            }
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #fff;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+                margin-left: 15%;
+            }
+            .dropdown-content a {
+                color: #5f027c;
+                font-weight: 700;
+                padding: 8px 16px;
+                text-decoration: none;
+                display: block;
+            }
+            .dropdown-content a:hover
+            {
+                background-color: #5f027c;
+                color: #fff;
+            }
+            .dropdown:hover .dropdown-content
+            {
+                display: block;
+            }
         </style>
     </head>
     <body>
@@ -90,14 +122,21 @@
                     <a href="Dashboard.php" class="hyper">practice</a>
                     <a href="Contests.php" class="hyper">compete</a>
                 </div>
-                <div class="col-sm-3 bg-warning">
-                    <p>hello</p>
+                <div class="col-sm-3">
+                    
                 </div>
-                <div class="col-sm-1 bg-info">
-                    <p>hello</p>
+                <div class="col-sm-1">
+                    
                 </div>
-                <div class="col-sm-2 bg-primary">
-                    <p>hello</p>
+                <div class="col-sm-2 box dropdown" style="border-radius: 25px;width: 13.5%;margin: 0.2% 1.5% 0% 1.5%;cursor: pointer;">
+                    <div class="row dropbtn">
+                        <img src="title.png" style="width:55px; border-radius: 50% ;height:55px;margin: 0;float: left;">
+                        <p class="title3"><?php echo $_SESSION['user_name'] ?></p>
+                    </div>
+                    <div class="dropdown-content">
+                        <a href="profile.php">Profile</a>
+                        <a href="login.php">Logout</a>
+                    </div>    
                 </div>
             </div>
             <div class="row">

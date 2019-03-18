@@ -7,11 +7,14 @@ session_start();
       {
             $email=$_POST['email'];
             $password=$_POST['password'];
-            $_SESSION['welcome']=$email;
+            $_SESSION['user_email']=$email;
             $check=mysqli_query($my,"select * from user_data where email='$email' and password='$password'");
             $num=mysqli_num_rows($check);
             if($num==1)
             {
+                  $data=mysqli_fetch_assoc($check);
+                  $_SESSION['user_id']=$data['id'];
+                  $_SESSION['user_name']=$data['name'];
                   header("location:Dashboard.php");
             }
       }
@@ -76,7 +79,7 @@ session_start();
                                                                                     <div class="form-item">
                                                                                           <div class="custom-input theme-m size-large">
                                                                                                 <div class="input-wrap align-icon-left has-icon">
-                                                                                                      <input id="input-11" type="email" class="input" placeholder="Enter your email" aria-label="Enter your email" aria-invalid="false" name="email" aria-required="true" value="">
+                                                                                                      <input id="input-11" type="email" class="input" placeholder="Enter your email" aria-label="Enter your email" aria-invalid="false" name="email" aria-required="true" value="" required/>
                                                                                                       <i class="ui-icon-email input-icon"></i>
                                                                                                 </div>
                                                                                           </div>
@@ -84,7 +87,7 @@ session_start();
                                                                                     <div class="form-item">
                                                                                           <div class="custom-input theme-m size-large">
                                                                                                 <div class="input-wrap align-icon-left has-icon">
-                                                                                                      <input id="input-12" type="password" class="input" placeholder="Enter your password" aria-label="Enter your password" aria-invalid="false" name="password" aria-required="true" value="">
+                                                                                                      <input id="input-12" type="password" class="input" placeholder="Enter your password" aria-label="Enter your password" aria-invalid="false" name="password" aria-required="true" value="" required/>
                                                                                                       <i class="ui-icon-lock input-icon"></i>
                                                                                                 </div>
                                                                                           </div>

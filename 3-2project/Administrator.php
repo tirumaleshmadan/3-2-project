@@ -27,6 +27,7 @@ session_start();
         		font-family: verdana;
         		font-weight: 900;
         		margin-left: 5%;
+                margin-bottom: 2%;
         	}
         	.title2{
         		color: #5f027c;
@@ -103,6 +104,27 @@ session_start();
             {
                 display: block;
             }
+            .head{
+                color: #5f027c;
+                font-size: 13px;
+                font-family: verdana;
+                font-weight: 700;
+                padding-top: 0.7%;
+                padding-left: 5%;
+                padding-bottom: 0%;
+                border-right: 1px solid #5f027c;
+            }
+            .head1{
+                color: #fff;
+                font-size: 13px;
+                font-family: verdana;
+                font-weight:800;
+                text-align: center;
+                background-color: #5f027c;
+                padding-top: 1%;
+                padding-bottom: 0.5%;
+                cursor: pointer;
+            }
         </style>
     </head>
     <body>
@@ -119,22 +141,56 @@ session_start();
     				<a href="Contests.php" class="hyper">compete</a>
     			</div>
     			<div class="col-sm-3">
-    				
-    			</div>
-    			<div class="col-sm-1">
-    				
-    			</div>
-    			<div class="col-sm-2 box dropdown" style="border-radius: 25px;width: 13.5%;margin: 0.2% 1.5% 0% 1.5%;cursor: pointer;">
-    				<div class="row dropbtn">
-    					<img src="title.png" style="width:55px; border-radius: 50% ;height:55px;margin: 0;float: left;">
+                    
+                </div>
+                <div class="col-sm-1">
+                    
+                </div>
+                <div class="col-sm-2 box dropdown" style="border-radius: 25px;width: 13.5%;margin: 0.2% 1.5% 0% 1.5%;cursor: pointer;">
+                    <div class="row dropbtn">
+                        <img src="title.png" style="width:55px; border-radius: 50% ;height:55px;margin: 0;float: left;">
                         <p class="title3"><?php echo $_SESSION['user_name'] ?></p>
                     </div>
                     <div class="dropdown-content">
                         <a href="profile.php">Profile</a>
                         <a href="login.php">Logout</a>
                     </div>    
-    			</div>
+                </div>
     		</div>
+            <div class="row">
+                <div class="col-lg-2 bg-1">
+                    
+                </div>
+                <div class="col-lg-8 bg-1">
+                    <div class="container-fluid box" style="margin: 2% 1% 1% 1.5%;background-color: #fff">
+                        <div class="row">
+                            <h4 class="title1">Administration</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 head box">
+                                <p>Manage Challenges</p>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 2%">
+                            <div class="col-sm-8">
+                                
+                            </div>
+                            <div id="challenge" onclick="location.href='challenge.php'" class="col-sm-2 head1 box">
+                                <p>Create Challenge</p>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+                <div class="col-lg-2 bg-1">
+                    
+                </div>
+            </div>
     	</div>
+        <script type="text/javascript">
+            $("challenge").click(function(){
+                window.location=$(this).find("a").attr("href"); return false;
+            });
+        </script>
     </body>
 </html>

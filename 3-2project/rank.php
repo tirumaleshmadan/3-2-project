@@ -75,6 +75,52 @@
                 background-color: #5f027c;
                 color: #fff;
             }
+            .lea{
+                color: white;
+                font-size: 14px;
+                font-family: verdana;
+                font-weight: 700;
+                text-align: center;
+            }
+            .leade{
+                color: #5f027c;
+                font-size: 12px;
+                font-family: verdana;
+                font-weight: 700;
+                text-align: center;
+            }
+            .dropbtn {
+                border: none;
+            }
+            .dropdown {
+                position: relative;
+                display: inline-block;
+            }
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #fff;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+                margin-left: 15%;
+            }
+            .dropdown-content a {
+                color: #5f027c;
+                font-weight: 700;
+                padding: 8px 16px;
+                text-decoration: none;
+                display: block;
+            }
+            .dropdown-content a:hover
+            {
+                background-color: #5f027c;
+                color: #fff;
+            }
+            .dropdown:hover .dropdown-content
+            {
+                display: block;
+            }
         </style>
     </head>
     <body>
@@ -90,14 +136,21 @@
                     <a href="Dashboard.php" class="hyper">practice</a>
                     <a href="Contests.php" class="hyper">compete</a>
                 </div>
-                <div class="col-sm-3 bg-warning">
-                    <p>hello</p>
+                <div class="col-sm-3">
+                    
                 </div>
-                <div class="col-sm-1 bg-info">
-                    <p>hello</p>
+                <div class="col-sm-1">
+                    
                 </div>
-                <div class="col-sm-2 bg-primary">
-                    <p>hello</p>
+                <div class="col-sm-2 box dropdown" style="border-radius: 25px;width: 13.5%;margin: 0.2% 1.5% 0% 1.5%;cursor: pointer;">
+                    <div class="row dropbtn">
+                        <img src="title.png" style="width:55px; border-radius: 50% ;height:55px;margin: 0;float: left;">
+                        <p class="title3"><?php echo $_SESSION['user_name'] ?></p>
+                    </div>
+                    <div class="dropdown-content">
+                        <a href="profile.php">Profile</a>
+                        <a href="login.php">Logout</a>
+                    </div>    
                 </div>
             </div>
             <div class="row">
@@ -148,26 +201,51 @@
                             </div>
                         </div>
                         <hr style="margin: 0" />
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
+                        <div class="container-fluid box" style="margin: 5% 4% 3% 4%;border-radius: 1%;">
+                            <div class="row" style="background-color: #5f027c;border-radius: 10px;padding-bottom: 0.5%;padding-top: 1%">
+                                <div class="col-sm-2">
+                                    <p class="lea">RANK</p>
+                                </div>
+                                <div class="col-sm-4">
+                                    <P class="lea">NAME</P>
+                                </div>
+                                <div class="col-sm-4">
+                                    <P class="lea">COUNTRY</P>
+                                </div>
+                                <div class="col-sm-2">
+                                    <P class="lea">POINTS</P>
+                                </div>
+                            </div>
+                        <?php
+                            $pos="q".(string)$_SESSION['D'];
+                            $table=$_SESSION['c'];
+                            $data=mysqli_query($my,"SELECT * FROM $table ORDER BY $pos DESC");
+                            $rank=1;
+                            while ($row=mysqli_fetch_assoc($data)) 
+                            {
+                                $user_id=trim($row['user_id']);
+                                $sub_data=mysqli_query($my,"SELECT * FROM user_data WHERE id=$user_id");
+                                $sub_row=mysqli_fetch_assoc($sub_data)
+                        ?>
+                            <div class="row" style="background-color: white;border-radius: 10px;padding-bottom: 0.5%;padding-top: 1%;margin-top: 0.5%;border-bottom: 1px dashed #5f027c">
+                                <div class="col-sm-2">
+                                    <p class="leade"><?php echo $rank ?></p>
+                                </div>
+                                <div class="col-sm-4">
+                                    <P class="leade"><?php echo $sub_row['name'] ?></P>
+                                </div>
+                                <div class="col-sm-4">
+                                    <P class="leade"><?php echo $sub_row['country'] ?></P>
+                                </div>
+                                <div class="col-sm-2">
+                                    <P class="leade"><?php echo $row[$pos] ?></P>
+                                </div>
+                            </div>
+                        <?php
+                            $rank=$rank+1;
+                            }
+                        ?>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-3 bg-1">

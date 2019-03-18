@@ -1,6 +1,21 @@
 <?php
     include("db.php");
     session_start();
+
+    $result=$_GET['ids'];
+
+    if (strlen(trim($result))>5) 
+    {
+        $table=substr($result,0,1);
+        $pos=substr($result,1,2);
+        $name=substr($result,3);
+    }
+    else 
+    {
+        $table=substr($result,0,2);
+        $pos=substr($result,2,2);
+        $name=$_SESSION['cname'];
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,18 +77,32 @@
             }
             .head1{
                 color: #fff;
-                font-size: 12px;
+                font-size: 20px;
                 font-family: verdana;
                 font-weight: 700;
                 text-align: center;
                 background-color: #5f027c;
-                padding-top: 0.7%;
-                padding-bottom: 0%;
-                cursor: pointer;
+                padding-top: 2%;
+                padding-bottom: 2%;
+                margin: 8% 0% 0% 13%;
             }
             .head:hover{
                 background-color: #5f027c;
                 color: #fff;
+            }
+            .lea{
+                color: white;
+                font-size: 14px;
+                font-family: verdana;
+                font-weight: 700;
+                text-align: center;
+            }
+            .leade{
+                color: #5f027c;
+                font-size: 12px;
+                font-family: verdana;
+                font-weight: 700;
+                text-align: center;
             }
             .dropbtn {
                 border: none;
@@ -142,71 +171,58 @@
             <div class="row">
                 <div class="col-lg-9 bg-1">
                     <div class="container-fluid box" style="margin: 3% 0% 1% 5%;background-color: #fff">
+                        <div class="row" style="margin: 2% 0% 1% 1%;">
+                            <p class="title1">LEADERBOARD</p>
+                        </div>
+                        <hr style="margin: 0" />
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <p class="head1"><?php echo $name ?></p>
+                            </div>
+                        </div>
+                        <div class="container-fluid box" style="margin: 5% 4% 3% 4%;border-radius: 1%;">
+                            <div class="row" style="background-color: #5f027c;border-radius: 10px;padding-bottom: 0.5%;padding-top: 1%">
+                                <div class="col-sm-2">
+                                    <p class="lea">RANK</p>
+                                </div>
+                                <div class="col-sm-4">
+                                    <P class="lea">NAME</P>
+                                </div>
+                                <div class="col-sm-4">
+                                    <P class="lea">COUNTRY</P>
+                                </div>
+                                <div class="col-sm-2">
+                                    <P class="lea">POINTS</P>
+                                </div>
+                            </div>
                         <?php
-                            $var=trim($_SESSION['C']);
-                            $var1=$_SESSION['D'];
-                            $data=mysqli_query($my,"SELECT * FROM $var WHERE ques_id=$var1");
-                            $row=mysqli_fetch_assoc($data);
+                            $data=mysqli_query($my,"SELECT * FROM $table ORDER BY $pos DESC");
+                            $rank=1;
+                            while ($row=mysqli_fetch_assoc($data)) 
+                            {
+                                $user_id=trim($row['user_id']);
+                                $sub_data=mysqli_query($my,"SELECT * FROM user_data WHERE id=$user_id");
+                                $sub_row=mysqli_fetch_assoc($sub_data)
                         ?>
-                        <div class="row">
-                            <p class="title1"><?php echo $row['ques_name'] ?></p>
+                            <div class="row" style="background-color: white;border-radius: 10px;padding-bottom: 0.5%;padding-top: 1%;margin-top: 0.5%;border-bottom: 1px dashed #5f027c">
+                                <div class="col-sm-2">
+                                    <p class="leade"><?php echo $rank ?></p>
+                                </div>
+                                <div class="col-sm-4">
+                                    <P class="leade"><?php echo $sub_row['name'] ?></P>
+                                </div>
+                                <div class="col-sm-4">
+                                    <P class="leade"><?php echo $sub_row['country'] ?></P>
+                                </div>
+                                <div class="col-sm-2">
+                                    <P class="leade"><?php echo $row[$pos] ?></P>
+                                </div>
+                            </div>
+                        <?php
+                            $rank=$rank+1;
+                            }
+                        ?>
                         </div>
-                        <div class="row" style="padding: 1% 0% 0.5% 7%;font-size: 10px;">
-                            <div class="col-sm-2">
-                                <p>ATTEMPTED BY: <b><?php echo $row['attempted'] ?></b></p>
-                            </div>
-                            <div class="col-sm-2">
-                                <p>ACCURACY: <b><?php echo $row['accuracy'] ?>%</b></p>
-                            </div>
-                            <div class="col-sm-2">
-                                <p>LEVEL: <b><?php echo $row['level'] ?></b></p>
-                            </div>
-                            <div class="col-sm-2">
-                                <p>POINTS: <b><?php echo $row['points'] ?></b></p>
-                            </div>
-                        </div>
-                        <hr style="margin: 0" />
-                        <div class="row">
-                            <div id="question" onclick="location.href='question.php'" class="col-sm-2 head">
-                                <p>PROBLEM</p>
-                            </div>
-                            <div id="submission" onclick="location.href='submission.php'" class="col-sm-2 head">
-                                <p>SUBMISSIONS</p>
-                            </div>
-                            <div id="discussion" onclick="location.href='discussion.php'" class="col-sm-2 head1 box">
-                                <p>DISCUSSION</p>
-                            </div>
-                            <div id="rank" onclick="location.href='rank.php'" class="col-sm-2 head">
-                                <p>LEADERBOARD</p>
-                            </div>
-                            <div id="editorial" onclick="location.href='editorial.php'" class="col-sm-2 head">
-                                <p>EDITORIAL</p>
-                            </div>
-                            <div id="analytics" onclick="location.href='analytics.php'" class="col-sm-2 head">
-                                <p>ANALYTICS</p>
-                            </div>
-                        </div>
-                        <hr style="margin: 0" />
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
-                        <p>hello</p>
                     </div>
                 </div>
                 <div class="col-lg-3 bg-1">
@@ -214,30 +230,5 @@
                 </div>
             </div>
         </div>
-        <script type="text/javascript">
-            $("question").click(function(){
-                window.location=$(this).find("a").attr("href"); return false;
-            });
-
-            $("submission").click(function(){
-                window.location=$(this).find("a").attr("href"); return false;
-            });
-
-            $("discussion").click(function(){
-                window.location=$(this).find("a").attr("href"); return false;
-            });
-
-            $("rank").click(function(){
-                window.location=$(this).find("a").attr("href"); return false;
-            });
-
-            $("editorial").click(function(){
-                window.location=$(this).find("a").attr("href"); return false;
-            });
-
-            $("analytics").click(function(){
-                window.location=$(this).find("a").attr("href"); return false;
-            });
-        </script>
     </body>
 </html>
